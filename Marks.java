@@ -1,22 +1,24 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap; 
 import java.util.Map; 
-import java.util.Scanner;
 
 class Class{
-    public void class_name(String mName){
+    public void class_name(final String mName){
         System.out.println("Class : "+ mName);
     }
 }
 
 abstract class Subject extends Class{
-    abstract void subject_name(String sub_name);
+    abstract void subject_name(final String sub_name);
     abstract void student_details(Map<String, Integer> map);
 }
 
 class Maths extends Subject{
     
     @Override
-    void subject_name(String sub_name){
+    void subject_name(final String sub_name){
         if (sub_name.equals("Maths")){
             System.out.println("Subject : "+sub_name);
         }
@@ -29,9 +31,9 @@ class Maths extends Subject{
     
 }
 class Marks{
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-	    int limit;
+	    final int limit;
 	    String name;
 	    int marks;
 
@@ -48,21 +50,23 @@ class Marks{
 		maths.student_details(map);
 		
 		//Experimental -> Get name and marks from user
-		Scanner get=new Scanner(System.in);
+		//Enter data using BufferReader
+        BufferedReader get = 
+                   new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("\nWant to enter data for other students!(Y->1 or N-> 0)");
-		int option=get.nextInt();
+		int option=Integer.parseInt(get.readLine());
 
 		if (option==1){
 		    System.out.println("\nPlease Enter Limit->");
-		    limit=get.nextInt();
+		    limit=Integer.parseInt(get.readLine());
 
 		    //Get input from user for multiple students
 		    for(int i=0; i<limit; i++ ){
 
 		        System.out.println("\nPlease Enter Name of Student ID:0"+(i+1)+"->");
-		        name=get.nextLine();
+		        name=get.readLine();
 		        System.out.println("\nPlease Enter Marks of Student "+name+"(Out of 50) ->");
-		        marks=Integer.parseInt(get.nextLine());
+		        marks=Integer.parseInt(get.readLine());
 
 		        //Enter the data to hash map
 		        map.put(name,marks);
